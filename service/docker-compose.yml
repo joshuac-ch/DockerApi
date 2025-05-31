@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: linux
+      MYSQL_ROOT_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
